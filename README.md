@@ -7,7 +7,14 @@ To run the docker pull command, to pull the docker image container
 docker pull shiran600/node-hello-world:latest
 
 After pull the docker image need to run the docker so the server of the nodejs will be in running state
+
+This run command will git the output:
+docker run -p 3000:3000 shiran600/node-hello-world:latest
+The output will be "hello world"
+
+This run command will git the output:
 docker run -p 3000:3000 -e NAME=<"REPLACE TO YOUR NAME"> shiran600/node-hello-world:latest
+The output will be "hello <"REPLACE TO YOUR NAME">"
 
 Open the web browser and paste the link
 http://127.0.0.1:3000/
