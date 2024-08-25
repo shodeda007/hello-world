@@ -1,0 +1,21 @@
+name: Trigger Jenkins Job
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Jenkins Job
+        run: |
+          curl -X POST "http://localhost:8080/job/nodejs_project/build?token=${{ secrets.JENKINS_TOKEN }}"
+        env:
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
