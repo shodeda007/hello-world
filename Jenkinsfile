@@ -32,6 +32,17 @@ pipeline {
             }
         }
 
+        stage('Build Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        bat 'docker login -u DOCKERHUB_USERNAME -p DOCKERHUB_PASSWORD'
+                        bat 'docker tag jenkins-node-hello-world:latest shiran600/jenkins-node-hello-world:latest'
+                        bat 'docker push shiran600/jenkins-node-hello-world:latest'
+                        bat 'docker logout'
+                    }
+            }
+        }
+
         stage('Complete Pipeline') {
             steps {
                 echo 'Pipeline execution completed successfully!'
