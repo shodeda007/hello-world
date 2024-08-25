@@ -26,6 +26,12 @@ pipeline {
             }
         }
 
+        stage('Build Image') {
+            steps {
+                bat 'docker build -t jenkins-node-hello-world .'
+            }
+        }
+
         stage('Complete Pipeline') {
             steps {
                 echo 'Pipeline execution completed successfully!'
