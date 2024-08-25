@@ -10,19 +10,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
         stage('Build Project') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-            deleteDir()  // Optional: Clean up workspace after the build
+            deleteDir()
         }
 
         success {
