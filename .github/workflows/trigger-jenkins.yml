@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Trigger Jenkins Job
-        run: |
-          curl -X POST "http://localhost:8080/job/nodejs_project/build?token=${{ secrets.JENKINS_TOKEN }}"
-        env:
-          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+        uses: appleboy/jenkins-action@master
+        with:
+          jenkins_url: "http://http://localhost:8080/"
+          user: ${{ secrets.JENKINS_USER }}
+          token: ${{ secrets.JENKINS_TOKEN }}
+          job: "nodejs_project"
