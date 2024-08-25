@@ -1,29 +1,50 @@
 pipeline {
     agent any
+
     stages {
-        stage('git checkout scm') {
+        stage('Checkout Code') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Test') {
+        stage('Install Dependencies') {
             steps {
-                sh 'sudo npm install'
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
                 sh 'npm test'
             }
         }
 
-        stage('Build') {
+        stage('Build Project') {
             steps {
                 sh 'npm run build'
             }
         }
 
-        stage('End Pipline') {
+        stage('Complete Pipeline') {
             steps {
-                echo 'complete!!!'
+                echo 'Pipeline execution completed successfully!'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            deleteDir()  // Optional: Clean up workspace after the build
+        }
+
+        success {
+            echo 'Build and tests succeeded!'
+        }
+
+        failure {
+            echo 'Build or tests failed.'
         }
     }
 }
