@@ -5,7 +5,7 @@ const hostname = '0.0.0.0';
 const port = 3000;
 
 // Get the name from the environment variable, or default to 'World'
-const nameFromEnv = process.env.NAME || 'World';
+const nameFromEnv = process.env.NAME || 'Batel';
 
 const server = createServer((req, res) => {
   const queryObject = url.parse(req.url, true).query;  // Parse the URL to get query parameters
